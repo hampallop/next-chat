@@ -1,6 +1,6 @@
 'use client'
 import * as React from 'react'
-import { useEffect, useRef } from 'react'
+import { useEffect } from 'react'
 import { useUserStore } from '@/state/user-state'
 import { ChatHeader, ChatDisplay, ChatSendMessageArea } from '@/components/chat'
 
