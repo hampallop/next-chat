@@ -2,12 +2,18 @@
 import * as React from 'react'
 import { useEffect, useRef } from 'react'
 import { ArrowUp } from 'lucide-react'
+import { v4 as uuidv4 } from 'uuid'
 
 import { Button } from '@/components/ui/button'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useMessageStore } from '@/state/message-state'
 import { useUserStore } from '@/state/user-state'
 import { cn } from '@/lib/utils'
+
+import { createClient } from '@/lib/supabase/client'
+import { useFetchMessage } from '@/app/hooks/use-fetch-message'
+import { useSubscribeMessage } from '@/app/hooks/use-subscribe-message'
+import { useAdjustTextareaHeight } from '@/app/hooks/use-adjust-textarea-height'
 
 function ChatHeader() {
   const { user, logout } = useUserStore()
@@ -29,13 +35,15 @@ function ChatDisplay() {
   const { messages } = useMessageStore()
   const { user } = useUserStore()
 
-  function scrollToBottom() {
-    if (containerRef.current) {
-      containerRef.current.scrollTop = containerRef.current.scrollHeight
-    }
-  }
+  useFetchMessage()
+  useSubscribeMessage()
 
   React.useLayoutEffect(() => {
+    const scrollToBottom = () => {
+      if (containerRef.current) {
+        containerRef.current.scrollTop = containerRef.current.scrollHeight
+      }
+    }
     scrollToBottom()
   })
 
@@ -76,38 +84,32 @@ type FormValues = {
 
 function ChatSendMessageArea({ user }: { user: string }) {
   const { register, handleSubmit } = useForm<FormValues>()
-
   const { messageInput, updateMessageInput, addNewMessage, clearMessageInput } =
     useMessageStore()
-  const textareaRef = useRef<HTMLTextAreaElement | null>(null)
+  const { textareaRef, handleInput } = useAdjustTextareaHeight()
+  const supabase = createClient()
 
   // Handle form submission
-  const onSubmit: SubmitHandler<FormValues> = (data) => {
-    addNewMessage({ user, message: data.message })
-    clearMessageInput()
-  }
+  const onSubmit: SubmitHandler<FormValues> = async (data) => {
+    const id = uuidv4()
 
-  // Set textarea height dynamically
-  const adjustTextareaHeight = () => {
-    if (textareaRef.current) {
-      textareaRef.current.style.height = '2.5rem' // Reset height
-      textareaRef.current.style.height = `${Math.min(
-        textareaRef.current.scrollHeight,
-        144,
-      )}px` // Adjust based on content
+    // Optimistic Update
+    addNewMessage({ id, user, message: data.message })
+    clearMessageInput()
+
+    const { error } = await supabase
+      .from('messages')
+      .insert([{ id, user, message: data.message }])
+      .select()
+
+    if (error) {
+      console.error(`Submitted Error: ${error.message}`)
     }
   }
 
-  // Handle input changes
-  const handleInput = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const onInput = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     updateMessageInput(event.target.value)
-    adjustTextareaHeight()
   }
-
-  // Initial height adjustment on mount
-  useEffect(() => {
-    adjustTextareaHeight()
-  }, [])
 
   return (
     <div className="container border-x py-4">
@@ -124,7 +126,7 @@ function ChatSendMessageArea({ user }: { user: string }) {
               }}
               className="bg-transparent resize-none border-none focus:outline-none focus:ring-0 w-full max-h-36 overflow-y-auto p-2 h-10"
               placeholder="Type your message here."
-              onInput={handleInput}
+              onInput={handleInput(onInput)}
               onKeyDown={(e) => {
                 if (e.key === 'Enter' && !e.shiftKey) {
                   e.preventDefault()
