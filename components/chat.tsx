@@ -1,6 +1,5 @@
 'use client'
 import * as React from 'react'
-import { useEffect, useRef } from 'react'
 import { ArrowUp } from 'lucide-react'
 import { v4 as uuidv4 } from 'uuid'
 
@@ -31,7 +30,7 @@ function ChatHeader() {
 }
 
 function ChatDisplay() {
-  const containerRef = useRef<HTMLDivElement | null>(null)
+  const containerRef = React.useRef<HTMLDivElement | null>(null)
   const { messages } = useMessageStore()
   const { user } = useUserStore()
 
