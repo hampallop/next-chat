@@ -9,3 +9,27 @@
 - Simple yet powerful state management by [Zustand](https://zustand-demo.pmnd.rs)
 - Form management by [React Hook Form](https://react-hook-form.com)
 - Deployed on [Vercel](https://vercel.com)
+
+## Things to be improve
+
+### Features
+
+- [ ] Chat room
+
+### Setup
+
+- [ ] Setup Test ([Vitest](https://vitest.dev), [Testing-Library](https://testing-library.com) and [Playwright](https://playwright.dev))
+- [ ] Test mock ([MSW](https://mswjs.io))
+- [ ] Setup [GitHub actions](https://github.com/features/actions) (typecheck, test, etc.)
+- [ ] Logging: ([Sentry](https://sentry.io))
+- [ ] Analytics: ([Amplitude](https://amplitude.com))
+
+## Interesting Parts
+
+Due to this repo is an example of chat applicaiton. I'll dedicate this part for showing which area I found it interesting when I built this app.
+
+- Dynamic height Textarea
+- Enter to submit in Textarea
+- Textarea: `onChange` vs `onInput`
+- Accessibility: tailwind `sr-only` on button submit icon
+- Accessibility: [role="log"](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/log_role)
