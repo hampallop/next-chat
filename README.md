@@ -1,5 +1,23 @@
 # Beta Chat
 
+An example of web real time app chat. Built by [Next.js](https://nextjs.org) and [Supabase](https://supabase.com).
+
+## Getting started
+
+1. Install the dependencies in the root of the repo.
+
+    ```bash
+    npm install
+    ```
+
+2. Copy the example .env.local.example to .env.local. Update variables via [Supabase API settings](https://app.supabase.com/project/_/settings/api)
+
+3. After that you can run the apps simultaneously with the following.
+
+```bash
+npm run dev
+```
+
 ## Tech stacks
 
 - Web App by [Next.js](https://nextjs.org)
@@ -19,7 +37,7 @@
 - [ ] Authentication
 - [ ] Edit / Remove message (Authentication required)
 
-### Setup
+### More setup
 
 - [ ] Setup Test ([Vitest](https://vitest.dev), [Testing-Library](https://testing-library.com) and [Playwright](https://playwright.dev))
 - [ ] Test mock ([MSW](https://mswjs.io))
