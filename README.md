@@ -55,3 +55,4 @@ Due to this repo is an example of chat applicaiton. I'll dedicate this part for 
 - [Accessibility: TailwindCSS sr-only on icon submit button](./docs/case-study/accessibility-screen-reader-submit-button.md)
 - [Accessibility: ARIA log role](./docs/case-study/accessibility-log-role.md)
 - [HTTP request and state management](./docs/case-study/http-request-and-state-management.md)
+- [useLayoutEffect in chat history](./docs/case-study/use-layout-effect-in-chat-history.md)
