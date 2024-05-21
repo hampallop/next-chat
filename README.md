@@ -49,8 +49,7 @@ npm run dev
 
 Due to this repo is an example of chat applicaiton. I'll dedicate this part for showing which area I found it interesting when I built this app.
 
-- Dynamic height Textarea
-- Enter to submit in Textarea
-- Accessibility: tailwind `sr-only` on button submit icon
-- Accessibility: [role="log"](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/log_role)
-- Form submit react-hook-form
+- [Dynamic height Textarea](./docs/case-study/dynamic-height-textarea.md)
+- [Enter to submit in Textarea](./docs/case-study/enter-to-submit-in-textarea.md)
+- [Accessibility: TailwindCSS sr-only on icon submit button](./docs/case-study/accessibility-screen-reader-submit-button.md)
+- [Accessibility: ARIA log role](./docs/case-study/accessibility-log-role.md)
