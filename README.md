@@ -14,9 +14,9 @@ An example of web real time app chat. Built by [Next.js](https://nextjs.org) and
 
 3. After that you can run the apps simultaneously with the following.
 
-```bash
-npm run dev
-```
+    ```bash
+    npm run dev
+    ```
 
 ## Tech stacks
 
