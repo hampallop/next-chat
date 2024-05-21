@@ -29,6 +29,9 @@ function ChatHeader() {
   )
 }
 
+// Future DateTime Component
+// const DateTime = () => <p className="text-sm text-muted-foreground">date time</p>
+
 function ChatDisplay() {
   const containerRef = React.useRef<HTMLDivElement | null>(null)
   const { messages } = useMessageStore()
@@ -58,8 +61,7 @@ function ChatDisplay() {
           className={(cn('flex flex-col'), index !== 0 ? 'mt-4' : '')}
         >
           <div className="flex items-center space-x-4">
-            <p className="text-sm font-semibold leading-none">{message.user}</p>
-            <p className="text-sm text-muted-foreground">date time</p>
+            <p className="text-sm font-semibold">{message.user}</p>
           </div>
           <div
             className={cn(
