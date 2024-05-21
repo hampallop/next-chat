@@ -19,7 +19,7 @@ function ChatHeader() {
   return (
     <div className="container flex py-4 border-x">
       <div className="flex flex-1 flex-col">
-        <h1 className="text-xl font-bold">Simple Chat</h1>
+        <h1 className="text-xl font-bold">Beta Chat</h1>
         {user}
       </div>
       <div>
