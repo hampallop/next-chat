@@ -10,9 +10,9 @@ import { useUserStore } from '@/state/user-state'
 import { cn } from '@/lib/utils'
 
 import { createClient } from '@/lib/supabase/client'
-import { useFetchMessage } from '@/app/hooks/use-fetch-message'
-import { useSubscribeMessage } from '@/app/hooks/use-subscribe-message'
-import { useAdjustTextareaHeight } from '@/app/hooks/use-adjust-textarea-height'
+import { useFetchMessage } from '@/hooks/use-fetch-message'
+import { useSubscribeMessage } from '@/hooks/use-subscribe-message'
+import { useAdjustTextareaHeight } from '@/hooks/use-adjust-textarea-height'
 
 function ChatHeader() {
   const { user, logout } = useUserStore()
