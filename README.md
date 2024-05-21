@@ -36,6 +36,7 @@ npm run dev
 - [ ] Add message date time
 - [ ] Authentication
 - [ ] Edit / Remove message (Authentication required)
+- [ ] Handling error
 
 ### More setup
 
@@ -53,3 +54,4 @@ Due to this repo is an example of chat applicaiton. I'll dedicate this part for 
 - [Enter to submit in Textarea](./docs/case-study/enter-to-submit-in-textarea.md)
 - [Accessibility: TailwindCSS sr-only on icon submit button](./docs/case-study/accessibility-screen-reader-submit-button.md)
 - [Accessibility: ARIA log role](./docs/case-study/accessibility-log-role.md)
+- [HTTP request and state management](./docs/case-study/http-request-and-state-management.md)
