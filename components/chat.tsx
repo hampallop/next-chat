@@ -17,7 +17,7 @@ import { useAdjustTextareaHeight } from '@/hooks/use-adjust-textarea-height'
 function ChatHeader() {
   const { user, logout } = useUserStore()
   return (
-    <div className="container flex py-4">
+    <header className="container flex py-4">
       <div className="flex flex-1 flex-col">
         <h1 className="text-xl font-bold">Beta Chat</h1>
         {user}
@@ -25,7 +25,7 @@ function ChatHeader() {
       <div>
         <Button onClick={logout}>Logout</Button>
       </div>
-    </div>
+    </header>
   )
 }
 
@@ -49,17 +49,17 @@ function ChatDisplay() {
 
   if (messagesState.status === 'idle') {
     return (
-      <div className="container border flex flex-1 justify-center items-center py-4">
+      <main className="container border flex flex-1 justify-center items-center py-4">
         <span role="alert" aria-busy="true" className="sr-only">
           Loading
         </span>
         <LoaderIcon className="animate-spin" />
-      </div>
+      </main>
     )
   }
 
   return (
-    <div
+    <main
       className="container flex-1 py-4 overflow-y-auto"
       ref={containerRef}
       role="log"
@@ -84,7 +84,7 @@ function ChatDisplay() {
           </div>
         </div>
       ))}
-    </div>
+    </main>
   )
 }
 
