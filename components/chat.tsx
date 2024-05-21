@@ -1,6 +1,6 @@
 'use client'
 import * as React from 'react'
-import { ArrowUp } from 'lucide-react'
+import { ArrowUp, LoaderIcon } from 'lucide-react'
 import { v4 as uuidv4 } from 'uuid'
 
 import { Button } from '@/components/ui/button'
@@ -34,10 +34,8 @@ function ChatHeader() {
 
 function ChatDisplay() {
   const containerRef = React.useRef<HTMLDivElement | null>(null)
-  const { messages } = useMessageStore()
   const { user } = useUserStore()
-
-  useFetchMessage()
+  const { messagesState } = useFetchMessage()
   useSubscribeMessage()
 
   React.useLayoutEffect(() => {
@@ -49,13 +47,24 @@ function ChatDisplay() {
     scrollToBottom()
   })
 
+  if (messagesState.status === 'idle') {
+    return (
+      <div className="container border flex flex-1 justify-center items-center py-4">
+        <span role="alert" aria-busy="true" className="sr-only">
+          Loading
+        </span>
+        <LoaderIcon className="animate-spin" />
+      </div>
+    )
+  }
+
   return (
     <div
       className="container border flex-1 py-4 overflow-auto"
       ref={containerRef}
       role="log"
     >
-      {messages.map((message, index) => (
+      {messagesState.messages.map((message, index) => (
         <div
           key={index}
           className={(cn('flex flex-col'), index !== 0 ? 'mt-4' : '')}

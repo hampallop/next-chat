@@ -6,21 +6,30 @@ type Message = {
   message: string
 }
 
-type MessagesStatus = 'init' | 'fetched'
+type MessagesStatus = 'idle' | 'fetched'
 
-interface MessageState {
+type MessagesState = {
+  status: MessagesStatus
   messages: Array<Message>
-  messagesStatus: MessagesStatus
-  setMessagesStatus: (messagesStatus: MessagesStatus) => void
-  addNewMessage: (messageData: Message) => void
-  setMessages: (message: Array<Message>) => void
 }
 
-export const useMessageStore = create<MessageState>()((set) => ({
-  messages: [],
-  messagesStatus: 'init',
-  setMessagesStatus: (messagesStatus) => set(() => ({ messagesStatus })),
+type State = {
+  messagesState: MessagesState
+}
+
+type Action = {
+  setMessagesState: (messagesState: MessagesState) => void
+  addNewMessage: (messageData: Message) => void
+}
+
+export const useMessageStore = create<State & Action>()((set) => ({
+  messagesState: { status: 'idle', messages: [] },
+  setMessagesState: (messagesState) => set({ messagesState }),
   addNewMessage: (messageData) =>
-    set((state) => ({ messages: [...state.messages, messageData] })),
-  setMessages: (messages) => set(() => ({ messages })),
+    set((state) => ({
+      messagesState: {
+        ...state.messagesState,
+        messages: [...state.messagesState.messages, messageData],
+      },
+    })),
 }))

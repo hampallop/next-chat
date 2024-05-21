@@ -3,7 +3,7 @@ import { useMessageStore } from '@/state/message-state'
 import { createClient } from '@/lib/supabase/client'
 
 export function useFetchMessage() {
-  const { setMessages, messagesStatus, setMessagesStatus } = useMessageStore()
+  const { messagesState, setMessagesState } = useMessageStore()
   const supabase = createClient()
 
   React.useEffect(() => {
@@ -13,13 +13,14 @@ export function useFetchMessage() {
       if (error) {
         console.error(`error: ${response.error.message}`)
       } else {
-        setMessages(data)
+        setMessagesState({ status: 'fetched', messages: data })
       }
     }
 
-    if (messagesStatus === 'init') {
+    if (messagesState.status === 'idle') {
       getMessages()
-      setMessagesStatus('fetched')
     }
-  }, [messagesStatus, setMessages, setMessagesStatus, supabase])
+  }, [messagesState.status, setMessagesState, supabase])
+
+  return { messagesState }
 }

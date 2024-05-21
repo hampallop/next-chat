@@ -3,7 +3,8 @@ import { useMessageStore } from '@/state/message-state'
 import { createClient } from '@/lib/supabase/client'
 
 export function useSubscribeMessage() {
-  const { messages, addNewMessage } = useMessageStore()
+  const { messagesState, addNewMessage } = useMessageStore()
+
   const supabase = createClient()
 
   React.useEffect(() => {
@@ -15,7 +16,9 @@ export function useSubscribeMessage() {
         (payload) => {
           if (payload.new) {
             const { id, message, user } = payload.new
-            const sameMessage = messages.find((message) => message.id === id)
+            const sameMessage = messagesState.messages.find(
+              (message) => message.id === id,
+            )
             if (!sameMessage) {
               addNewMessage({ id, user, message })
             }
@@ -27,5 +30,5 @@ export function useSubscribeMessage() {
     return () => {
       channel.unsubscribe()
     }
-  }, [addNewMessage, messages, supabase])
+  }, [addNewMessage, messagesState.messages, supabase])
 }
