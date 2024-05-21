@@ -15,6 +15,9 @@
 ### Features
 
 - [ ] Chat room
+- [ ] Add message date time
+- [ ] Authentication
+- [ ] Edit / Remove message (Authentication required)
 
 ### Setup
 
@@ -30,6 +33,6 @@ Due to this repo is an example of chat applicaiton. I'll dedicate this part for 
 
 - Dynamic height Textarea
 - Enter to submit in Textarea
-- Textarea: `onChange` vs `onInput`
 - Accessibility: tailwind `sr-only` on button submit icon
 - Accessibility: [role="log"](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/log_role)
+- Form submit react-hook-form
