@@ -1,3 +1,4 @@
+// This is a data just for development purpose.
 export const originMessages = [
   {
     user: 'Toby',

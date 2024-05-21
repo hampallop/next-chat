@@ -82,10 +82,9 @@ type FormValues = {
 }
 
 function ChatSendMessageArea({ user }: { user: string }) {
-  const { register, handleSubmit } = useForm<FormValues>()
-  const { messageInput, updateMessageInput, addNewMessage, clearMessageInput } =
-    useMessageStore()
-  const { textareaRef, handleInput } = useAdjustTextareaHeight()
+  const { register, handleSubmit, formState, reset } = useForm<FormValues>()
+  const { addNewMessage } = useMessageStore()
+  const { textareaRef, adjustTextareaHeight } = useAdjustTextareaHeight()
   const supabase = createClient()
 
   // Handle form submission
@@ -94,7 +93,7 @@ function ChatSendMessageArea({ user }: { user: string }) {
 
     // Optimistic Update
     addNewMessage({ id, user, message: data.message })
-    clearMessageInput()
+    reset({ message: '' })
 
     const { error } = await supabase
       .from('messages')
@@ -106,10 +105,6 @@ function ChatSendMessageArea({ user }: { user: string }) {
     }
   }
 
-  const onInput = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    updateMessageInput(event.target.value)
-  }
-
   return (
     <div className="container border-x py-4">
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -117,7 +112,10 @@ function ChatSendMessageArea({ user }: { user: string }) {
           <div className="flex flex-1 items-center">
             <textarea
               {...register('message', {
-                required: 'This field is required',
+                required: true,
+                onChange: () => {
+                  adjustTextareaHeight()
+                },
               })}
               ref={(e) => {
                 textareaRef.current = e
@@ -125,21 +123,21 @@ function ChatSendMessageArea({ user }: { user: string }) {
               }}
               className="bg-transparent resize-none border-none focus:outline-none focus:ring-0 w-full max-h-36 overflow-y-auto p-2 h-10"
               placeholder="Type your message here."
-              onInput={handleInput(onInput)}
               onKeyDown={(e) => {
                 if (e.key === 'Enter' && !e.shiftKey) {
                   e.preventDefault()
-                  handleSubmit(onSubmit)()
+                  if (formState.isValid) {
+                    handleSubmit(onSubmit)()
+                  }
                 }
               }}
-              value={messageInput}
             />
           </div>
           <Button
             className="rounded-full"
             size="icon"
             type="submit"
-            disabled={messageInput.trim().length === 0}
+            disabled={!formState.isValid}
           >
             <ArrowUp className="h-6 w-6" />
             <span className="sr-only">Send</span>

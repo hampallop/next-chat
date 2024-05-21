@@ -16,17 +16,11 @@ export function useAdjustTextareaHeight() {
 
   // Initial height adjustment on mount
   React.useEffect(() => {
-    console.log('use effect')
     adjustTextareaHeight()
   }, [])
 
   return {
     textareaRef,
-    handleInput(
-      handler: (event: React.ChangeEvent<HTMLTextAreaElement>) => void,
-    ) {
-      adjustTextareaHeight()
-      return handler
-    },
+    adjustTextareaHeight,
   }
 }
