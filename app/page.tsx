@@ -18,7 +18,7 @@ export default function Home() {
   }
 
   return (
-    <div className="max-w-3xl mx-auto h-screen flex flex-col">
+    <div className="grid grid-rows-[auto,1fr,auto] h-dvh max-w-3xl mx-auto">
       <ChatHeader />
       <ChatDisplay />
       <ChatSendMessageArea user={user} />

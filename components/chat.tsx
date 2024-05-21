@@ -60,7 +60,7 @@ function ChatDisplay() {
 
   return (
     <div
-      className="container flex-1 py-4 overflow-auto"
+      className="container flex-1 py-4 overflow-y-auto"
       ref={containerRef}
       role="log"
     >
