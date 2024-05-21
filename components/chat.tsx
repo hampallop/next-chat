@@ -17,7 +17,7 @@ import { useAdjustTextareaHeight } from '@/hooks/use-adjust-textarea-height'
 function ChatHeader() {
   const { user, logout } = useUserStore()
   return (
-    <div className="container flex py-4 border-x">
+    <div className="container flex py-4">
       <div className="flex flex-1 flex-col">
         <h1 className="text-xl font-bold">Beta Chat</h1>
         {user}
@@ -60,7 +60,7 @@ function ChatDisplay() {
 
   return (
     <div
-      className="container border flex-1 py-4 overflow-auto"
+      className="container flex-1 py-4 overflow-auto"
       ref={containerRef}
       role="log"
     >
@@ -117,7 +117,7 @@ function ChatSendMessageArea({ user }: { user: string }) {
   }
 
   return (
-    <div className="container border-x py-4">
+    <div className="container py-4">
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="flex bg-[#f4f4f4] items-end rounded-3xl p-4">
           <div className="flex flex-1 items-center">
