@@ -2,6 +2,8 @@
 
 An example of web real time app chat. Built by [Next.js](https://nextjs.org) and [Supabase](https://supabase.com).
 
+→ Checkout ideas in [Figma](https://www.figma.com/design/q2rCRjjcsXrfbfsanSdqub/NEXT-BETA-CHAT?node-id=0%3A1&t=bCDzfP7DJTFgoQ9j-1).
+
 ## Getting started
 
 1. Install the dependencies in the root of the repo.
