@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-export function useAdjustTextareaHeight() {
+export function useAdjustTextareaHeight(textareaValue: string) {
   const textareaRef = React.useRef<HTMLTextAreaElement | null>(null)
 
   // Set textarea height dynamically
@@ -17,7 +17,7 @@ export function useAdjustTextareaHeight() {
   // Initial height adjustment on mount
   React.useEffect(() => {
     adjustTextareaHeight()
-  }, [])
+  }, [textareaValue])
 
   return {
     textareaRef,

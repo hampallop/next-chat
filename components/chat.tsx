@@ -93,10 +93,13 @@ type FormValues = {
 }
 
 function ChatSendMessageArea({ user }: { user: string }) {
-  const { register, handleSubmit, formState, reset } = useForm<FormValues>()
+  const { register, handleSubmit, formState, reset, watch } =
+    useForm<FormValues>()
   const { addNewMessage } = useMessageStore()
-  const { textareaRef, adjustTextareaHeight } = useAdjustTextareaHeight()
   const supabase = createClient()
+
+  const message = watch('message')
+  const { textareaRef } = useAdjustTextareaHeight(message)
 
   // Handle form submission
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
@@ -124,9 +127,6 @@ function ChatSendMessageArea({ user }: { user: string }) {
             <textarea
               {...register('message', {
                 required: true,
-                onChange: () => {
-                  adjustTextareaHeight()
-                },
               })}
               ref={(e) => {
                 textareaRef.current = e
