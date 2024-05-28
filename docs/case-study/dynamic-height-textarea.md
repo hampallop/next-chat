@@ -23,11 +23,12 @@ const adjustTextareaHeight = () => {
 // Initial height adjustment on mount
 React.useEffect(() => {
   adjustTextareaHeight()
-}, [])
+}, [textareaInputValue])
 
 // adjust textarea height when user type
 <textarea
   ref={textareaRef}
+  value={textareaInputValue}
   onInput={() => {adjustTextareaHeight()}}
 />
 ```
