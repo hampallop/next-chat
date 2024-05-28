@@ -49,7 +49,7 @@ function ChatDisplay() {
 
   if (messagesState.status === 'idle') {
     return (
-      <main className="container border flex flex-1 justify-center items-center py-4">
+      <main className="container flex flex-1 justify-center items-center py-4">
         <span role="alert" aria-busy="true" className="sr-only">
           Loading
         </span>
